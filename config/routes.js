@@ -34,7 +34,8 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  }
+  },
+
 
   /***************************************************************************
   *                                                                          *
@@ -45,5 +46,12 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
+
+  'post/login': 'AuthController.login',
+  '/logout': 'AuthController.logout',
+
+  'get /signup':{
+    // TODO handle this
+  }
 
 };

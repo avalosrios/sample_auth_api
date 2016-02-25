@@ -21,14 +21,35 @@ module.exports.http = {
   *                                                                           *
   ****************************************************************************/
 
-  // middleware: {
+  middleware: {
 
+    passportInit: require('passport').initialize(),
+    passportSession: require('passport').session(),
   /***************************************************************************
   *                                                                          *
   * The order in which middleware should be run for HTTP request. (the Sails *
   * router is invoked by the "router" middleware below.)                     *
   *                                                                          *
   ***************************************************************************/
+
+  order: [
+           'startRequestTimer',
+           'cookieParser',
+           'session',
+           'passportInit',
+           'passportSession',
+           'myRequestLogger',
+           'bodyParser',
+           'handleBodyParserError',
+           'compress',
+           'methodOverride',
+           'poweredBy',
+           'router',
+           'www',
+           'favicon',
+           '404',
+           '500'
+         ],
 
     // order: [
     //   'startRequestTimer',
@@ -54,10 +75,10 @@ module.exports.http = {
   *                                                                           *
   ****************************************************************************/
 
-    // myRequestLogger: function (req, res, next) {
-    //     console.log("Requested :: ", req.method, req.url);
-    //     return next();
-    // }
+    myRequestLogger: function (req, res, next) {
+         console.log("Requested :: ", req.method, req.url);
+         return next();
+    }
 
 
   /***************************************************************************
@@ -71,7 +92,7 @@ module.exports.http = {
 
     // bodyParser: require('skipper')
 
-  // },
+  },
 
   /***************************************************************************
   *                                                                          *
