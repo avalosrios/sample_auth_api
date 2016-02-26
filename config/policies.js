@@ -37,7 +37,7 @@ module.exports.policies = {
   UserController: {
     update: 'isAuthenticated',
     remove: 'isAuthenticated',
-    findOne: 'isAuthenticated',
+    //findOne: 'isAuthenticated',
     //find: 'isAuthenticated',
   },
 	// RabbitController: {
