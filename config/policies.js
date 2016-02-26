@@ -38,6 +38,7 @@ module.exports.policies = {
     update: 'isAuthenticated',
     remove: 'isAuthenticated',
     findOne: 'isAuthenticated',
+    //find: 'isAuthenticated',
   },
 	// RabbitController: {
 

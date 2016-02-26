@@ -6,9 +6,8 @@ passport.use(new BasicStrategy({
     passwordField: 'password'
   },
   function(email, password, done){
-    console.log("basic strategy email", email);
+    console.log("basic strategy email", [email, password]);
     User.findOne({ email: email}, function(err, user){
-      console.log('find one', user);
       if (err){ return done(err); }
       if (!user){ return done(null, false, { message: "User not found."}); }
       user.verifyPassword(password, {
@@ -16,9 +15,11 @@ passport.use(new BasicStrategy({
           return done(err);
         },
         incorrect: function(){
+          console.log('auth-basic: Wrong password');
           return done(null,false, { message: "Wrong password"});
         },
         success: function(){
+          console.log('auth-basic: Authenticated');
           return done(null, user);
         }
       });
