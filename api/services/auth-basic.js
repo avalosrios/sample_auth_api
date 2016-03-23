@@ -16,7 +16,7 @@ passport.use(new BasicStrategy({
         },
         incorrect: function(){
           console.log('auth-basic: Wrong password');
-          return done(null,false, { message: "Wrong password"});
+          return done(null, false, { message: "Wrong password."});
         },
         success: function(){
           console.log('auth-basic: Authenticated');

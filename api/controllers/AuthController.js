@@ -22,16 +22,32 @@ module.exports = {
 				'basic',
 				{session: false},
 				function(err, user, info){
-					if( (err) || (!user)){
+					console.log(err);
+					console.log(user);
+					console.log(info);
+					/*if( (err) || (!user)){
 						return res.send({
-							message: info.message,
+							message: err,
+							info: info,
 							user: user
 						});
-					}
+					}*/
 					req.logIn(user, function(err){
-						if(err) res.send(err);
+						console.log(cosa);
+						console.log(caca);
+						if(err){
+							return res.send({
+								error: err,
+								user: user
+							}, 500);
+						}else{
+							return res.send({
+								message: "Not authenticated",
+								user: user
+							}, 401);
+						}
 						return res.send({
-							message: info.message,
+							message: info,
 							user: user
 						});
 					});

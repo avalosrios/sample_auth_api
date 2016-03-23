@@ -4,7 +4,6 @@ module.exports = function(req, res, next) {
     'basic',
     { session: false  },
     function(err, user, info){
-      console.log(user);
       if( (err) || (!user)){
         if(err){
           return res.send({
