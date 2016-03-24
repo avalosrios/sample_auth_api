@@ -1,4 +1,5 @@
 var passport = require('passport')
+/*
 module.exports = function(req, res, next) {
   passport.authenticate(
     'basic',
@@ -21,4 +22,20 @@ module.exports = function(req, res, next) {
       }
       return next(null, user);
     })(req, res, next);
+};
+*/
+
+module.exports = function(req,res, next){
+  passport.authenticate(
+    'jwt',
+    {session: false},
+    function(error, user, info){
+      if(error){return res.serverError(error);}
+      if(!user){
+        return res.unauthorized(null, info && info.code, info && info.message);
+      }
+      req.user = user;
+      return next();
+    }
+  )(req, res, next);
 };
