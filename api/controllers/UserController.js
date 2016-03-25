@@ -7,12 +7,20 @@
 
 module.exports = {
 
-	/*find: function(req, res){
-		userlist = [];
-		User.find().then(function(users){
-			userlist = users;
-		});
-		return res.send({data: userlist });
-	}*/
+  create: function(req, res){
+    console.log("User controller create");
+    var params = req.params.all();
+    console.log("params", params);
+    var user = params.user;
+    User.create(params).exec(function(err,user){
+      console.log("ERROR", err);
+      if(err) return res.serverError(err);
+      console.log("User created: ", user);
+      return res.json({
+        user: user,
+        jwtToken: user.jwtToken()
+      });
+    });
+  },
 
 };

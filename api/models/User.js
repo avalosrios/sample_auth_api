@@ -35,19 +35,12 @@ module.exports = {
     verifyPassword: function(password, callback){ // callback needs to have error, incorrect and success
       // Compare a plaintext password attempt against an already-encrypted version.
       var obj = this.toObject();
-      Passwords.checkPassword({
-        passwordAttempt: password,
-        encryptedPassword: obj.password,
-      }).exec({
-        // An unexpected error occurred.
-        error: callback.error,
-        // Password attempt does not match already-encrypted version
-        incorrect: callback.incorrect,
-        // OK.
-        success: callback.success,
+      CipherService.verifyPassword(password, obj.password,{
+        error: callback.error, // An unexpected error occurred.
+        incorrect: callback.incorrect, // Password attempt does not match already-encrypted version
+        success: callback.success, // OK.
       });
     },// End of verifyPassword function
-
   },
   beforeValidate: function(user, next){
     // TODO nothing

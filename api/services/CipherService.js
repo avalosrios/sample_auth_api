@@ -54,4 +54,21 @@ module.exports = {
     }).exec(callbackObj);
   },
 
+  /**
+  * Checks passwords match
+  * @param passphrase : User sent passphrase
+  * @param encriptedPassphrase: encripted password to check
+  * @param callbackObj
+  *   {
+  *    success: Success Callback,
+  *    error: Error Callback
+  *   }
+  */
+  verifyPassword: function(passphrase, encriptedPassphrase, callbackObj){
+    Passwords.checkPassword({
+      passwordAttempt: passphrase,
+      encryptedPassword: encriptedPassphrase,
+    }).exec(callbackObj);
+  }
+
 }
